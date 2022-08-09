@@ -1,6 +1,6 @@
 {
-  "name": "font-collector",
-  "version": "0.1.0",
+  "name": "font-cutting",
+  "version": "0.0.1",
   "description": "一键生成中文字体集",
   "main": "index.js",
   "bin": {
@@ -19,7 +19,7 @@
   "dependencies": {
     "argv": "0.0.2",
     "commander": "^2.9.0",
-    "font-carrier": "0.0.9",
+    "font-carrier": "^0.3.1",
     "glob": "^6.0.1",
     "iconv-lite": "^0.4.13",
     "lodash": "^3.10.1",
