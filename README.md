@@ -1,20 +1,24 @@
-# font-collector 集字
+# font-cutting 集字
 
-[![npm version](https://badge.fury.io/js/font-collector.svg)](http://badge.fury.io/js/font-collector)
+[![npm version](https://badge.fury.io/js/font-cutting.svg)](http://badge.fury.io/js/font-cutting)
 
-字体库分割工具, 自动解析html、js等文件中的中文，按需压缩生成web所用格式字体文件
+字体库分割工具, 自动解析 html、js 等文件中的中文，按需压缩生成 web 所用格式字体文件
 
 # 安装
 
-    npm install font-collector -g
+    npm install font-cutting
 
 # 功能
 
-- 支持从html、js等任何文本文件中提取中文字符 支持utf-8、gbk编码
+- 支持从 html、js 等任何文本文件中提取中文字符 支持 utf-8、gbk 编码
 
-- 自动切分压缩(ttf格式)字体文件，导出到指定目录
+- 自动切分压缩(ttf 格式)字体文件，导出到指定目录
 
-- 支持导出四种浏览器主流字体 (ttf, eot, woff, svg)
+- 支持导出 woff2
+
+# 注意
+
+只能使用 ttf 格式的字体进行切割
 
 # 使用
 
@@ -22,9 +26,9 @@
 
 ## 命令行：
 
-    font-collector -h
+    font-cutting -h
 
-        Usage: font-collector [options] <path pattern or filepath ...>
+        Usage: font-cutting [options] <path pattern or filepath ...>
 
     Options:
 
@@ -48,12 +52,12 @@
 
 ### 示例命令：
 
-    $ font-collector -f test/lib/handfont.ttf -s test/index.html -o test/fonts/handfont
+    $ font-cutting -f test/lib/handfont.ttf -s test/index.html -o test/fonts/handfont
 
 ### 生成结果如下
 
 ```
-font-collector/
+font-cutting/
 └── test/
     ├── fonts/
     │   ├── handfont.eot
@@ -61,7 +65,7 @@ font-collector/
     │   ├── handfont.ttf
     │   ├── handfont.woff
     ├── lib/
-    │   └── handfont.ttf 
+    │   └── handfont.ttf
     └──index.html
 
 ```
@@ -70,13 +74,12 @@ font-collector/
 
 `推荐` 可以使用配置文件的方式保存配置，方便构建。配置文件默认名称为 `font.config.json` 放在工程根目录。
 
-执行 `font-collector` 命令会自动读取当前目录下的配置文件
+执行 `font-cutting` 命令会自动读取当前目录下的配置文件
 
-手动指定配置文件： `font-collector -c myfont.confong.json`
+手动指定配置文件： `font-cutting -c myfont.confong.json`
 
 配置文件格式如下：
 
-    
     {
         "source": {
             "path": ["pattern", "another/pattern"],
@@ -96,11 +99,11 @@ font: 字体源文件路径;
 
 output: 输出字体文件路径; ps: 需指定文件名并且不带后缀;
 
-例：fonts/myfont; 会生成 fonts/myfont.eot | svg | ttf | woff四种字体
+例：fonts/myfont; 会生成 fonts/myfont.eot | svg | ttf | woff 四种字体
 
 ### 示例配置文件:
 
-搜索app文件夹下所有文件
+搜索 app 文件夹下所有文件
 
     font.config.json
 
@@ -114,7 +117,7 @@ output: 输出字体文件路径; ps: 需指定文件名并且不带后缀;
         "output": "./fonts/handfont"
     }
 
-搜索当前目录所有文件，不包括fonts文件夹中文件，不包括lib文件夹中.tff文件
+搜索当前目录所有文件，不包括 fonts 文件夹中文件，不包括 lib 文件夹中.tff 文件
 
     font.config.json
 
@@ -129,17 +132,8 @@ output: 输出字体文件路径; ps: 需指定文件名并且不带后缀;
         "output": "./fonts/handfont"
     }
 
-
-
-## 字体兼容性
-
-| 格式      | IE   | Firefox | Chrome | Safari | Opera | iOS Safari | Android Browser | Chrome for Android | 
-| ------- | ---- | ------- | ------ | ------ | ----- | ---------- | --------------- | ------------------ | 
-| `.eot`  | 6    | --      | --     | --     | --    | --         | --              | --                 | 
-| `.woff` | 9    | 3.6     | 5      | 5.1    | 11.1  | 5.1        | 4.4             | 36                 | 
-| `.ttf`  | --   | 3.5     | 4      | 3.1    | 10.1  | 4.3        | 2.2             | 36                 | 
-| `.svg`  | --   | --      | 4      | 3.2    | 9.6   | 3.2        | 3               | 36                 | 
-
-##  thanks
+## thanks
 
 > <https://github.com/purplebamboo/font-carrier> 提供字体底层操作支持
+
+> <https://github.com/JailBreakC/font-collector> 根据 JailBreakC 的代码库升级过后的使用
